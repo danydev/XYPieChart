@@ -235,9 +235,9 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         if(!_showLabel) return;
         NSString *label;
         if(_showPercentage)
-            label = [NSString stringWithFormat:@"%0.0f", layer.percentage*100];
+            label = [NSString stringWithFormat:@"%0.0f%%", layer.percentage*100];
         else
-            label = (layer.text)?layer.text:[NSString stringWithFormat:@"%0.0f", layer.value];
+            label = (layer.text)?layer.text:[NSString stringWithFormat:@"%0.0f%%", layer.value];
         CGSize size = [label sizeWithFont:self.labelFont];
         
         if(M_PI*2*_labelRadius*layer.percentage < MAX(size.width,size.height))
@@ -656,9 +656,9 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
     if(!_showLabel) return;
     NSString *label;
     if(_showPercentage)
-        label = [NSString stringWithFormat:@"%0.0f", pieLayer.percentage*100];
+        label = [NSString stringWithFormat:@"%0.0f%%", pieLayer.percentage*100];
     else
-        label = (pieLayer.text)?pieLayer.text:[NSString stringWithFormat:@"%0.0f", value];
+        label = (pieLayer.text)?pieLayer.text:[NSString stringWithFormat:@"%0.0f%%", value];
     
     CGSize size = [label sizeWithFont:self.labelFont];
     
