@@ -11,7 +11,6 @@
 
 @implementation ViewController
 
-@synthesize pieChartRight = _pieChart;
 @synthesize pieChartLeft = _pieChartCopy;
 @synthesize percentageLabel = _percentageLabel;
 @synthesize selectedSliceLabel = _selectedSlice;
@@ -51,12 +50,6 @@
     [self.pieChartLeft setUserInteractionEnabled:NO];
     [self.pieChartLeft setLabelShadowColor:[UIColor blackColor]];
 
-    [self.pieChartRight setDelegate:self];
-    [self.pieChartRight setDataSource:self];
-    [self.pieChartRight setPieCenter:CGPointMake(240, 240)];
-    [self.pieChartRight setShowPercentage:NO];
-    [self.pieChartRight setLabelColor:[UIColor blackColor]];
-
     [self.percentageLabel.layer setCornerRadius:90];
     
     self.sliceColors =[NSArray arrayWithObjects:
@@ -73,7 +66,6 @@
 - (void)viewDidUnload
 {
     [self setPieChartLeft:nil];
-    [self setPieChartRight:nil];
     [self setPercentageLabel:nil];
     [self setSelectedSliceLabel:nil];
     [self setIndexOfSlices:nil];
@@ -91,7 +83,6 @@
 {
     [super viewDidAppear:animated];
     [self.pieChartLeft reloadData];
-    [self.pieChartRight reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -125,7 +116,6 @@
 - (IBAction)clearSlices {
     [_slices removeAllObjects];
     [self.pieChartLeft reloadData];
-    [self.pieChartRight reloadData];
 }
 
 - (IBAction)addSliceBtnClicked:(id)sender 
@@ -171,7 +161,6 @@
         }
     }
     [self.pieChartLeft reloadData];
-    [self.pieChartRight reloadData];
 }
 
 - (IBAction)updateSlices
@@ -181,12 +170,6 @@
         [_slices replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:rand()%60+20]];
     }
     [self.pieChartLeft reloadData];
-    [self.pieChartRight reloadData];
-}
-
-- (IBAction)showSlicePercentage:(id)sender {
-    UISwitch *perSwitch = (UISwitch *)sender;
-    [self.pieChartRight setShowPercentage:perSwitch.isOn];
 }
 
 #pragma mark - XYPieChart Data Source
@@ -203,7 +186,6 @@
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
-    if(pieChart == self.pieChartRight) return nil;
     return [self.sliceColors objectAtIndex:(index % self.sliceColors.count)];
 }
 
